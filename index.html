@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <video id="player" controls autoplay playsinline>
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const videoPlayer = document.getElementById('player');
+            const params = new URLSearchParams(window.location.search);
+            const videoUrl = params.get('v');
+
+            if (videoUrl) {
+                // The URL from the tweet will be Base64 encoded, so we decode it here
+                const decodedUrl = atob(videoUrl);
+                videoPlayer.src = decodedUrl;
+                videoPlayer.play();
+            }
+        });
+    </script>
+</body>
+</html>
